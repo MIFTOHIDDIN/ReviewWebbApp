@@ -41,7 +41,7 @@ export const Login = () => {
                         <Card.Body>
                             <h2 className="text-center mb-4 ">{ }Log In </h2>
 
-asdad
+
                             <Form >
                                 <Form.Group id="email">
                                     <Form.Label>Email</Form.Label>
