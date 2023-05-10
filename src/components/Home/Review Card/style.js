@@ -1,22 +1,19 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 
 import { ReactComponent as Like } from "../../../assets/icon/like.svg"
 import { ReactComponent as Comment } from "../../../assets/icon/comment.svg";
-const center = css`
-  display: flex;
-  align-items: center;
-`;
+
 export const Container = styled.div`
 
-height: 470px;
+height: 490px;
 width: 100%;
 max-width: 380px;
 min-width: 343px;
-
+margin: 20px;
 
 background-color: ${({ theme }) => theme.bg};
-border-radius: 30px;
+
 
 
 `

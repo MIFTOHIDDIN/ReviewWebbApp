@@ -4,47 +4,49 @@ import React, { useEffect, useRef, useState, } from 'react'
 import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, GithubAuthProvider, onAuthStateChanged } from 'firebase/auth'
 import { app } from "../../../firebase/mock";
 import { Icon } from "./style";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Container } from "../Sign In/style";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase } from "firebase/database";
+import { Alert } from "antd";
 
 
 export const SignUp = () => {
 
     const emailRef = useRef()
     const passwordRef = useRef()
-    const passwordConfirmRef = useRef()
+    const navigate = useNavigate()
     const auth = getAuth( app )
-    const db = getDatabase(app);
 
-    const [ user, setUser ] = useState( {} )
-    useEffect( () => {
 
-        const unsubscribe = onAuthStateChanged( auth, ( currentUser ) => {
-            setUser( currentUser )
-        } )
-    }, [] )
     const googleAuth = new GoogleAuthProvider();
     const githubAuth = new GithubAuthProvider();
 
 
-    const onRegister = () => {
+    const onRegister = ( e ) => {
+        e.preventDefault()
         createUserWithEmailAndPassword( auth, emailRef.current.value, passwordRef.current.value )
-            .then( res => { console.log( res, 'success' ) } ).catch( err => {
-                console.log( err, 'errr' );
+            .then( res => {
+                console.log( res, 'success' )
+                navigate( '/home' )
+                alert( "You have Signed Up Successfully!" )
+                localStorage.setItem( "token", emailRef.current.value )
+            } )
+            .catch( err => {
+                console.log( err, 'errr' )
+                alert( "WARN!!! You have something wrong for SignUp,try again" )
+
             } )
 
     }
-    // function writeUserData ( userId, name, email, imageUrl ) {
-    //     set( ref( db, 'users/' + userId ), {
-    //         username: name,
-    //         email: email,
-    //         profile_picture: imageUrl
-    //     } );
-    // }
+
+
     const onGoogle = () => {
         signInWithPopup( auth, googleAuth ).then( ( result ) => {
-            console.log( result );
+            console.log( result )
+            navigate( '/home' )
+            alert( "You have Signed Up Successfully!" )
+            localStorage.setItem( "token", emailRef.current.value )
+            localStorage.setItem( "token", emailRef.current.value )
             // This gives you a Google Access Token. You can use it to access the Google API.
             const credential = GoogleAuthProvider.credentialFromResult( result );
             const token = credential.accessToken;
@@ -58,6 +60,8 @@ export const SignUp = () => {
             const errorMessage = error.message;
             // The email of the user's account used.
             const email = error.customData.email;
+            alert( "WARN!!! You have something wrong for SignUp,try again" )
+
             // The AuthCredential type that was used.
             const credential = GoogleAuthProvider.credentialFromError( error );
             // ...
@@ -71,6 +75,9 @@ export const SignUp = () => {
                 // This gives you a GitHub Access Token. You can use it to access the GitHub API.
                 const credential = GithubAuthProvider.credentialFromResult( result );
                 const token = credential.accessToken;
+                navigate( '/home' )
+                alert( "You have Signed Up Successfully!" )
+                localStorage.setItem( "token", emailRef.current.value )
 
                 // The signed-in user info.
                 const user = result.user;
@@ -84,6 +91,8 @@ export const SignUp = () => {
                 const email = error.customData.email;
                 // The AuthCredential type that was used.
                 const credential = GithubAuthProvider.credentialFromError( error );
+                alert( "WARN!!! You have something wrong for SignUp,try again" )
+
                 // ...
             } );
     }

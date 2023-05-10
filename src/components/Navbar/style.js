@@ -134,36 +134,10 @@ ${center}
 `
 
 export const Btn = styled.button`
-:hover{
-
-  background-color: rgb(205, 205, 205);
-
-}
-width: 106px;
-height:46px;
-
 font-size: 14px;
 cursor: pointer;
 background-color: ${({ theme }) => theme.bg};
-border: ${({ theme }) => theme.text} solid;
-border-radius: 20px;
 color:${({ theme }) => theme.text};
 
-
-`
-Btn.Log = styled(Btn)`
-:hover{
-
-background-color: rgb(205, 205, 205);
-
-}
-width: 92px;
-height:36px;
-
-font-size: 14px;
-cursor: pointer;
-background-color: ${({ theme }) => theme.bg};
-border: ${({ theme }) => theme.text} solid;
-border-radius: 20px;
-color:${({ theme }) => theme.text};
+border: none;
 `

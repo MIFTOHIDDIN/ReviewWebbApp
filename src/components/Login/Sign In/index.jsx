@@ -1,14 +1,15 @@
 
 import { Button, Card, Form } from "react-bootstrap";
 import React, { useRef, useState, } from 'react'
-import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, GithubAuthProvider, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth'
 import { app } from "../../../firebase/mock";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Container } from "./style";
+
 
 export const Login = () => {
 
-
+    const navigate = useNavigate()
 
     const emailRef = useRef()
     const passwordRef = useRef()
@@ -21,14 +22,26 @@ export const Login = () => {
 
 
 
-    const onLogin = () => {
+    const onLogin = ( e ) => {
+
+        e.preventDefault()
+        console.log( e );
         signInWithEmailAndPassword( auth, emailRef.current.value, passwordRef.current.value )
-            .then( res => { console.log( res, 'success' ) } )
-            .catch( err => {
-                console.log( err, 'errr' );
+            .then( res => {
+                console.log( res, 'success' )
+                navigate( '/home' )
+                alert( "You have logged in succesfully" )
+                localStorage.setItem( "token", emailRef.current.value )
             } )
+
+            .catch( err => {
+                console.log( err, 'errr' )
+                alert( "WARN!! Your email or password is not correct" )
+
+            } )
+
     }
- 
+
     const logout = async () => {
         await signOut( auth )
     }
@@ -39,7 +52,7 @@ export const Login = () => {
                     { user?.email }
                     <Card>
                         <Card.Body>
-                            <h2 className="text-center mb-4 ">{ }Log In </h2>
+                            <h2 className="text-center mb-4 ">Log In </h2>
 
 
                             <Form >
