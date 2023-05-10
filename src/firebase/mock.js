@@ -1,15 +1,12 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { getDatabase, onValue, ref, set, } from "firebase/database";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: "AIzaSyAtJtr2U7chNmcfl_07jGotv9G8IzD4EOc",
     authDomain: "authwithsocialmedia-a71dd.firebaseapp.com",
+    databaseURL: "https://authwithsocialmedia-a71dd-default-rtdb.asia-southeast1.firebasedatabase.app",
     projectId: "authwithsocialmedia-a71dd",
     storageBucket: "authwithsocialmedia-a71dd.appspot.com",
     messagingSenderId: "735600230281",
@@ -17,7 +14,7 @@ const firebaseConfig = {
     measurementId: "G-0DNMMWS7X7"
 };
 
-// Initialize Firebase
-export const app = initializeApp(firebaseConfig);
 
-const analytics = getAnalytics(app);
+export const app = initializeApp( firebaseConfig );
+
+

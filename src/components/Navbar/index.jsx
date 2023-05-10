@@ -59,8 +59,8 @@ export const Navbar = () => {
                                 bodyStyle={{ borderRadius: "18px" }}
                                 centered
                             >
-                                <Wrap.Language>
-                                    <Wrap.LangImage src={flag_en} /> English
+                                <Wrap.Language >
+                                    <Wrap.LangImage  src={flag_en} /> English
                                 </Wrap.Language>
                                 <Wrap.Language>
                                     <Wrap.LangImage src={flag_ru} /> Uzbek

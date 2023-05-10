@@ -5,26 +5,27 @@ import { Route, Routes, Navigate } from 'react-router-dom'
 import { data } from '../utilits/navbar'
 import { ReviewPage } from '../components/Review Page'
 import Login from '../components/Login/Sign In'
+import SignUp from '../components/Login/Sign Up'
 
 export const Root = () => {
 
   return (
     <Routes>
-      <Route element={<Navbar />} >
+      <Route element={ <Navbar /> } >
 
         {
-          data.map((value) => {
-            return <Route key={value.id} path={value.path} element={value.element} />
-          })
+          data.map( ( value ) => {
+            return <Route key={ value.id } path={ value.path } element={ value.element } />
+          } )
         }
 
-        <Route path='/home/reviews' element={<ReviewPage />} />
-        <Route path='/home/registration/login' element={<Login />} />
+        <Route path='/home/reviews' element={ <ReviewPage /> } />
+        <Route path='/home/registration/signup' element={ <SignUp /> } />
 
       </Route>
 
-      <Route path={"*"} element={<h1>404 NOT FOUND</h1>} />
-      <Route path={"/"} element={<Navigate to={"/home"} />} />
+      <Route path={ "*" } element={ <h1>404 NOT FOUND</h1> } />
+      <Route path={ "/" } element={ <Navigate to={ "/home" } /> } />
 
     </Routes>
 
