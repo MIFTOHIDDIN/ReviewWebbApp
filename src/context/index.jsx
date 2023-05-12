@@ -1,14 +1,17 @@
 import React from 'react'
 import { ThemeProvider } from './Theme'
-import AuthProvider from './Auth'
+
+import { MoveProvider } from './Movei'
 
 
 
-export const MainProvider = ({ children }) => {
+export const MainProvider = ( { children } ) => {
     return (
         <ThemeProvider>
+            <MoveProvider>
 
-                {children}
+                { children }
+            </MoveProvider>
 
         </ThemeProvider>
     )

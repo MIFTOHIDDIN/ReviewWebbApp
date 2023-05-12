@@ -5,6 +5,7 @@ import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from
 import { app } from "../../../firebase/mock";
 import { Link, useNavigate } from "react-router-dom";
 import { Container } from "./style";
+import { Alert, Space, message } from "antd";
 
 
 export const Login = () => {
@@ -28,22 +29,40 @@ export const Login = () => {
         console.log( e );
         signInWithEmailAndPassword( auth, emailRef.current.value, passwordRef.current.value )
             .then( res => {
+             
                 console.log( res, 'success' )
                 navigate( '/home' )
-                alert( "You have logged in succesfully" )
+                message.success( "Login success" )
+
                 localStorage.setItem( "token", emailRef.current.value )
             } )
 
             .catch( err => {
                 console.log( err, 'errr' )
-                alert( "WARN!! Your email or password is not correct" )
+                message.error( "WARN!! Your email or password is not correct" )
+
 
             } )
 
     }
 
-    const logout = async () => {
-        await signOut( auth )
+    const logout = ( e ) => {
+        e.preventDefault()
+
+        signOut( auth ).then( res => {
+            console.log( res, 'success' )
+
+            message.success( "You have SignedOut  succesfully" )
+
+            localStorage.removeItem( "token", emailRef.current.value )
+        } )
+
+            .catch( ( err ) => {
+                message.error( err.message, 'error' )
+
+
+            } )
+
     }
     return (
         <>

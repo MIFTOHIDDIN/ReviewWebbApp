@@ -23,6 +23,7 @@ max-height: 220px;
 cursor: pointer;
 
 
+
 `
 export const Content = styled.div`
 padding: 0 20px;
@@ -35,11 +36,16 @@ padding: 16px 0;
 
 
 `
-Details.Item = styled.div`
+Details.Item = styled.button`
 display: flex;
 flex-direction: column;
 align-items: center;
 cursor: pointer;
+border: none;
+color:${( { theme } ) => theme.text} ;
+background-color: ${( { theme } ) => theme.bg};
+
+
 
 `
 

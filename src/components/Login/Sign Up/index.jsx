@@ -7,7 +7,7 @@ import { Icon } from "./style";
 import { Link, useNavigate } from "react-router-dom";
 import { Container } from "../Sign In/style";
 import { getDatabase } from "firebase/database";
-import { Alert } from "antd";
+import { Alert, message } from "antd";
 
 
 export const SignUp = () => {
@@ -28,12 +28,12 @@ export const SignUp = () => {
             .then( res => {
                 console.log( res, 'success' )
                 navigate( '/home' )
-                alert( "You have Signed Up Successfully!" )
+                message.success( "You have Signed Up Successfully!" )
                 localStorage.setItem( "token", emailRef.current.value )
             } )
             .catch( err => {
                 console.log( err, 'errr' )
-                alert( "WARN!!! You have something wrong for SignUp,try again" )
+                message.error( "WARN!!! You have something wrong for SignUp,try again" )
 
             } )
 
@@ -44,27 +44,27 @@ export const SignUp = () => {
         signInWithPopup( auth, googleAuth ).then( ( result ) => {
             console.log( result )
             navigate( '/home' )
-            alert( "You have Signed Up Successfully!" )
+            message.success( "You have Signed Up Successfully!" )
             localStorage.setItem( "token", emailRef.current.value )
             localStorage.setItem( "token", emailRef.current.value )
-            // This gives you a Google Access Token. You can use it to access the Google API.
+
             const credential = GoogleAuthProvider.credentialFromResult( result );
             const token = credential.accessToken;
-            // The signed-in user info.
+
             const user = result.user;
-            // IdP data available using getAdditionalUserInfo(result)
-            // ...
+
+
         } ).catch( ( error ) => {
-            // Handle Errors here.
+
             const errorCode = error.code;
             const errorMessage = error.message;
-            // The email of the user's account used.
-            const email = error.customData.email;
-            alert( "WARN!!! You have something wrong for SignUp,try again" )
 
-            // The AuthCredential type that was used.
+            const email = error.customData.email;
+            message.error( "WARN!!! You have something wrong for SignUp,try again" )
+
+
             const credential = GoogleAuthProvider.credentialFromError( error );
-            // ...
+
         } );
     }
     const onGithub = () => {
@@ -72,28 +72,28 @@ export const SignUp = () => {
         signInWithPopup( auth, githubAuth )
 
             .then( ( result ) => {
-                // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+
                 const credential = GithubAuthProvider.credentialFromResult( result );
                 const token = credential.accessToken;
                 navigate( '/home' )
-                alert( "You have Signed Up Successfully!" )
+                message.success( "You have Signed Up Successfully!" )
                 localStorage.setItem( "token", emailRef.current.value )
 
-                // The signed-in user info.
+
                 const user = result.user;
-                // IdP data available using getAdditionalUserInfo(result)
-                // ...
+
+
             } ).catch( ( error ) => {
-                // Handle Errors here.
+
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                // The email of the user's account used.
-                const email = error.customData.email;
-                // The AuthCredential type that was used.
-                const credential = GithubAuthProvider.credentialFromError( error );
-                alert( "WARN!!! You have something wrong for SignUp,try again" )
 
-                // ...
+                const email = error.customData.email;
+
+                const credential = GithubAuthProvider.credentialFromError( error );
+                message.error( "WARN!!! You have something wrong for SignUp,try again" )
+
+
             } );
     }
     return (

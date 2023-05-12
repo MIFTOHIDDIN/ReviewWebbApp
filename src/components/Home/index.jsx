@@ -1,19 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Button, Container, Wrap } from './style'
 import { ReviewCard } from './Review Card'
 import { useNavigate } from 'react-router-dom';
+import { useMovieContext } from '../../context/Movei';
+
 
 export const Home = () => {
   const navigate = useNavigate()
-  const [ data, setData ] = useState( [] );
+  const [ state, dispatch ] = useMovieContext()
+
   const onClick = () => {
     navigate( '/book' )
   }
   useEffect( () => {
-    fetch( "http://localhost:5003/books" )
-      .then( ( res ) => res.json() )
-      .then( ( res ) => setData( res ) );
+    dispatch( { type: 'all' } )
   }, [] );
+
+  console.log( state, 'sta' );
   return (
     <>
       <Wrap.Button>
@@ -30,7 +33,7 @@ export const Home = () => {
       </Wrap>
       <Container>
 
-        { data.map( ( value ) => {
+        { state?.map && state?.map( ( value ) => {
           return <ReviewCard key={ value._id } data={ value } />;
         } ) }
 

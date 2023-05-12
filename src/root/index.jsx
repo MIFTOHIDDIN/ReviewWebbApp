@@ -15,7 +15,7 @@ export const Root = () => {
       <Route element={ <Navbar /> } >
 
         {
-          data.map( ( value ) => {
+          data?.map && data?.map( ( value ) => {
             return <Route key={ value.id } path={ value.path } element={ value.element } />
           } )
         }

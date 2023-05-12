@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { Button, Container, Inp, Wrap } from "./style";
 import { useNavigate } from "react-router-dom";
+import { message } from "antd";
 
 export const AddBook = () => {
     const navigate = useNavigate()
@@ -11,6 +12,7 @@ export const AddBook = () => {
 
 
     const onSubmit = ( e ) => {
+        e.preventDefault()
         fetch( "http://localhost:5003/books", {
             method: "POST",
             headers: {
@@ -25,9 +27,20 @@ export const AddBook = () => {
             } ),
         } )
             .then( ( res ) => res.json() )
-            .then( ( res ) => console.log( res ),
-                alert( "You have successfully added new Review,Thank you" ),
-                navigate( '/home' )
+            .then( ( res ) => {
+
+                if ( res?.message )
+                {
+                    message.error( res.message )
+                } else
+                {
+                    message.success( 'successfully created' )
+                    navigate( '/home' )
+                }
+            }
+
+
+
             ).catch( ( err ) => console.log( err, "error" ),
 
             );

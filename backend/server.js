@@ -23,6 +23,7 @@ const booksRoute = require( "./routes/books" );
 app.get( "/books", booksRoute );
 app.post( "/books", booksRoute );
 app.get( "/books/:id", booksRoute );
+app.post( "/get/all", booksRoute );
 
 app.listen( port, () => {
     console.log( `Server is running ${ port }` );

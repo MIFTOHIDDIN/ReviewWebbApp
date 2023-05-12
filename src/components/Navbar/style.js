@@ -5,6 +5,7 @@ import { ReactComponent as Dark } from "../../assets/icon/icon-dark.svg";
 import { ReactComponent as Global } from "../../assets/icon/global.svg";
 import { ReactComponent as Personal } from "../../assets/icon/personal.svg";
 
+
 const center = css`
 display: flex;
 align-items: center;
@@ -14,6 +15,7 @@ ${center}
  background-color: ${({ theme }) => theme.bg};
   height: 72px;
   width: 100%;
+  min-width: 100%;
   position: fixed;
   border-bottom: ${({ theme }) => theme.text} solid;
 `

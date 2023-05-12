@@ -6,12 +6,20 @@ import { Outlet, useNavigate } from 'react-router-dom'
 import { Modal } from 'antd';
 import flag_en from "../../assets/img/flag-en.png";
 import flag_ru from "../../assets/img/Flag_of_Uzbekistan.svg.png";
-// import 'antd/dist/reset.css';
+import { useMovieContext } from '../../context/Movei'
+
 export const Navbar = () => {
     const [ isModalOpen, setIsModalOpen ] = useState( false );
-
+    const [ state, dis ] = useMovieContext()
     const [ { dark }, dispatch ] = useThemeContext()
     const navigate = useNavigate()
+   
+    
+    const onChange = ( { target: { value } } ) => {
+        dis( { type: 'search', payload: value } )
+    }
+
+
 
     return (
         <>
@@ -23,7 +31,9 @@ export const Navbar = () => {
                     </Wrap.Images>
 
                     <Search>
+
                         <Search.Input
+                            onChange={ onChange }
                             className="search_input"
                             placeholder="Search"
                         />
@@ -76,6 +86,8 @@ export const Navbar = () => {
 
                             <Icon.Personal />
                         </Controllers>
+
+
                     </ControlController>
 
 
