@@ -10,10 +10,11 @@ export const AddBook = () => {
     const groupRef = useRef();
     const descRef = useRef();
 
+    const { REACT_APP_BASE_URL: url } = process.env
 
     const onSubmit = ( e ) => {
         e.preventDefault()
-        fetch( "http://localhost:5003/books", {
+        fetch( `${ url }/books`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -23,18 +23,25 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { app } from "../../firebase/mock";
 
 const desc = [ "terrible", "bad", "normal", "good", "wonderful" ];
+
+
 export const ReviewPage = ( props ) => {
+
     const param = useParams();
     const auth = getAuth( app )
     const [ user, setUser ] = useState( {} )
+
     onAuthStateChanged( auth, ( currentUser ) => {
         setUser( currentUser )
     } )
 
-    console.log( param, "url" );
+    const { REACT_APP_BASE_URL: url } = process.env
+
+    console.log( url, "url" );
     const [ data, setData ] = useState();
     useEffect( () => {
-        fetch( `http://localhost:5003/books/${ param.id }` )
+        console.log( param.id, 'id' );
+        fetch( `${ url }/books/${ param.id }` )
             .then( ( res ) => res.json() )
             .then( ( res ) => setData( res ) );
     }, [] );
@@ -68,7 +75,7 @@ export const ReviewPage = ( props ) => {
                         Name : { data?.book?.name || "no name" }
                     </div>
                 </ReviewName>
-             
+
 
                 <Info>{ data?.book?.description }</Info>
 
@@ -93,7 +100,7 @@ export const ReviewPage = ( props ) => {
                         </Wrapper.Text>
 
                         <Form   >
-                            <Wrapper.Inp id="usernameInput"  type="text" placeholder="Add comment..." />
+                            <Wrapper.Inp id="usernameInput" type="text" placeholder="Add comment..." />
                             <Btn type="submit">Add</Btn>
                         </Form>
                     </Wrapper.Comment>

@@ -7,6 +7,8 @@ const app = express();
 mongoose.connect(
     "mongodb+srv://admin:admin@cluster0.uq4pl6p.mongodb.net/?retryWrites=true&w=majority",
     { useNewUrlParser: true }
+
+
 );
 
 const db = mongoose.connection;
